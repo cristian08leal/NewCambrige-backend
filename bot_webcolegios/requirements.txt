@@ -1,0 +1,26 @@
+# =============================================================================
+# requirements.txt — Dependencias del bot WebColegios
+# =============================================================================
+# Requisito de versión: Python >= 3.10
+# Instalar con: pip install -r requirements.txt
+
+# Automatización web (Playwright es el único motor utilizado, Selenium fue removido COD-04)
+playwright>=1.40.0
+
+# Procesamiento de datos (ETL para importaciones masivas y parsing tabular)
+pandas>=2.2.0
+
+# Extracción de texto estructurado desde reportes PDF generados por la plataforma
+pdfplumber>=0.10.3
+
+# Conexión asíncrona y pool de PostgreSQL (BD-01)
+psycopg2-binary>=2.9.9
+
+# Utilidades y Seguridad
+python-dotenv>=1.0.0       # Carga de variables de entorno desde .env (SEG-01)
+cryptography>=42.0.0       # Cifrado Fernet para credenciales seguras en tabla login (SEG-03)
+
+# Interfaz Web y API Backend
+fastapi>=0.100.0           # Framework base para la API
+uvicorn>=0.23.0            # Servidor ASGI para FastAPI
+jinja2>=3.1.2              # Motor de templates (requerido si se sirven vistas directas o correos)
