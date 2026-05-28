@@ -27,3 +27,6 @@ __pycache__/
 node_modules/
 dist/
 static_react/
+
+# Pruebas y temporales
+scratch/
