@@ -9,6 +9,7 @@ from app.modules.tesoreria.router import router as tesoreria_router
 from app.modules.uniformes.router import router as uniformes_router
 from app.modules.paz_y_salvo.router import router as paz_salvo_router
 from app.modules.secretaria.router import router as secretaria_router
+from app.modules.webcolegios.router import router as webcolegios_router
 #from app.modules.rectoria.router import router as rectoria_router
 from app.modules.parametrizacion.router import router as parametrizacion_router
 
@@ -23,6 +24,7 @@ routers = [
     (uniformes_router, "/api/uniformes", "Uniformes"),
     (paz_salvo_router, "/api/paz-salvo", "Paz y Salvo"),
     (secretaria_router, "/api/secretaria", "Secretaria"),
+    (webcolegios_router, "/api/webcolegios", "WebColegios"),
     #(rectoria_router, "/api/rectoria", "Rectoria"),
     (parametrizacion_router, "/api/parametrizacion", "Parametrizacion"),
 ]
