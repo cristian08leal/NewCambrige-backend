@@ -1,7 +1,17 @@
-from logging.config import fileConfig
-from sqlalchemy import engine_from_config, pool
-from alembic import context
+import sys
 import os
+
+# Forzar UTF-8 en Windows para rutas con caracteres especiales (ñ, á, etc.)
+# Esto debe ir ANTES de cualquier otro import que use la base de datos
+os.environ["PYTHONUTF8"] = "1"
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8')
+
+from logging.config import fileConfig
+from sqlalchemy import pool, create_engine
+from alembic import context
 from dotenv import load_dotenv
 
 # Cargar variables de entorno desde .env
@@ -47,11 +57,11 @@ def run_migrations_offline() -> None:
 
 
 def run_migrations_online() -> None:
-    connectable = engine_from_config(
-        config.get_section(config.config_ini_section, {}),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
-    )
+    # Usamos create_engine directamente con la URL del entorno
+    # para evitar problemas con rutas que contienen caracteres especiales (ñ)
+    db_url = os.environ["DATABASE_URL"]
+    connectable = create_engine(db_url, poolclass=pool.NullPool)
+
     with connectable.connect() as connection:
         context.configure(connection=connection, target_metadata=target_metadata)
         with context.begin_transaction():

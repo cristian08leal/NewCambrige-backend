@@ -1,6 +1,8 @@
+import logging
 from sqlalchemy.orm import Session
 from .models import SyncEjecucion
-from app.core.logger import logger
+
+logger = logging.getLogger(__name__)
 
 def registrar_inicio_ejecucion(db: Session, fase: int) -> int:
     ejec = SyncEjecucion(fase=fase, estado="EN_PROGRESO")
